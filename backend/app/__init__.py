@@ -12,7 +12,7 @@ def create_app():
 
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app, origins=["http://localhost:5173", "http://172.29.249.160:5173"], supports_credentials=True)
+    CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"], supports_credentials=True)
 
     from app.routes.auth import auth_bp
     from app.routes.jobs import jobs_bp
