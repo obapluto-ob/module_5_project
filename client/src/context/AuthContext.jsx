@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-
+// This is the global auth state manager for the application. 
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
