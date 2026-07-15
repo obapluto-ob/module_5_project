@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import Application, Job
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from sqlalchemy import select
 
 applications_bp = Blueprint("applications", __name__)
 
@@ -9,10 +10,10 @@ applications_bp = Blueprint("applications", __name__)
 @applications_bp.route("/jobs/<int:job_id>/apply", methods=["POST"])
 @jwt_required()
 def apply(job_id):
-    Job.query.get_or_404(job_id)
+    db.get_or_404(Job, job_id)
     user_id = int(get_jwt_identity())
 
-    if Application.query.filter_by(user_id=user_id, job_id=job_id).first():
+    if db.session.execute(select(Application).filter_by(user_id=user_id, job_id=job_id)).scalar_one_or_none():
         return jsonify({"message": "Already applied to this job"}), 409
 
     data = request.get_json() or {}
@@ -31,14 +32,14 @@ def apply(job_id):
 @jwt_required()
 def get_applications():
     user_id = int(get_jwt_identity())
-    applications = Application.query.filter_by(user_id=user_id).all()
+    applications = db.session.execute(select(Application).filter_by(user_id=user_id)).scalars().all()
     return jsonify([a.to_dict() for a in applications]), 200
 
 
 @applications_bp.route("/applications/<int:app_id>", methods=["PUT"])
 @jwt_required()
 def update_application(app_id):
-    application = Application.query.get_or_404(app_id)
+    application = db.get_or_404(Application, app_id)
     user_id = int(get_jwt_identity())
 
     # Allow applicant or job poster to update status
@@ -56,7 +57,7 @@ def update_application(app_id):
 @applications_bp.route("/applications/<int:app_id>", methods=["DELETE"])
 @jwt_required()
 def delete_application(app_id):
-    application = Application.query.get_or_404(app_id)
+    application = db.get_or_404(Application, app_id)
     user_id = int(get_jwt_identity())
 
     if application.user_id != user_id:
