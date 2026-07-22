@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import Application, Job
+from app.schemas import applications_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 applications_bp = Blueprint("applications", __name__)
@@ -32,7 +33,7 @@ def apply(job_id):
 def get_applications():
     user_id = int(get_jwt_identity())
     applications = Application.query.filter_by(user_id=user_id).all()
-    return jsonify([a.to_dict() for a in applications]), 200
+    return jsonify(applications_schema.dump(applications)), 200
 
 
 @applications_bp.route("/applications/<int:app_id>", methods=["PUT"])
