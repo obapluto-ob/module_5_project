@@ -39,26 +39,31 @@ export default function Applications() {
 
 const styles = {
   container: {
-    padding: '2rem',
+    padding: '2.5rem 1.5rem',
+    maxWidth: '800px',
+    margin: '0 auto',
   },
   heading: {
+    fontSize: '1.75rem',
+    fontWeight: '700',
     marginBottom: '1.5rem',
   },
   empty: {
-    color: '#888',
+    color: 'var(--text-muted)',
   },
   card: {
-    background: '#fff',
-    padding: '1.2rem',
-    borderRadius: '8px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+    background: 'var(--surface)',
+    border: '1px solid var(--border)',
+    borderRadius: 'var(--radius)',
+    padding: '1.25rem',
     marginBottom: '1rem',
+    boxShadow: 'var(--shadow)',
     display: 'flex',
     flexDirection: 'column',
     gap: '0.3rem',
   },
   company: {
-    color: '#555',
+    color: 'var(--text-muted)',
     fontSize: '0.95rem',
   },
   status: {
@@ -66,7 +71,7 @@ const styles = {
     textTransform: 'capitalize',
   },
   date: {
-    color: '#888',
+    color: 'var(--text-muted)',
     fontSize: '0.85rem',
   },
 }
