@@ -1,12 +1,13 @@
 # JobBoard
 
-A full-stack job board web application where job seekers can browse and apply for jobs, and employers can post listings.
+A full-stack job board app where job seekers can browse and apply for jobs and employers can post listings. Built as a group project — frontend team handled React, I handled the Flask backend.
 
 ## Tech Stack
 
-- **Frontend:** React, Vite, React Router, Axios
-- **Backend:** Flask, Flask-JWT-Extended, SQLAlchemy
-- **Database:** SQLite (development)
+- Frontend: React, Vite, React Router, Axios
+- Backend: Flask, Flask-JWT-Extended, Flask-SQLAlchemy, Flask-Migrate
+- Database: SQLite
+- Dependencies managed with Pipenv
 
 ## Project Structure
 
@@ -16,16 +17,7 @@ module_5_project/
 └── backend/      # Flask backend
 ```
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js v20+
-- Python 3.10+
-
----
-
-### Frontend Setup
+## Running the Frontend
 
 ```bash
 cd client
@@ -33,56 +25,51 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173`
+Runs on `http://127.0.0.1:5173`
 
----
-
-### Backend Setup
+## Running the Backend
 
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-flask db upgrade
-python seed.py
-python run.py
+pipenv install
+export FLASK_APP=run.py
+pipenv run flask db upgrade
+pipenv run python seed.py
+pipenv run python run.py
 ```
 
-Runs on `http://localhost:5000`
-
----
+Runs on `http://127.0.0.1:5000`
 
 ## Features
 
-- User registration and login with JWT authentication
+- Register and login with JWT tokens
 - Password reset flow
-- Browse and search job listings
+- Browse job listings
 - Apply for jobs with a cover letter
-- Save jobs for later
-- Employer dashboard to post and manage job listings
-- Protected routes for authenticated users
+- Save jobs to come back to later
+- Employer dashboard to post and manage jobs
+- Protected routes so only logged in users can access certain pages
 
-## Routes
+## Frontend Routes
 
-| Path | Access |
-|------|--------|
-| `/` | Public |
-| `/login` | Public |
-| `/register` | Public |
-| `/reset-password` | Public |
-| `/jobs` | Public |
-| `/jobs/:id` | Public |
-| `/dashboard` | Protected |
-| `/applications` | Protected |
-| `/saved-jobs` | Protected |
-| `/profile` | Protected |
-| `/post-job` | Protected |
+| Path | Who can access |
+|------|----------------|
+| `/` | Everyone |
+| `/login` | Everyone |
+| `/register` | Everyone |
+| `/reset-password` | Everyone |
+| `/jobs` | Everyone |
+| `/jobs/:id` | Everyone |
+| `/dashboard` | Logged in only |
+| `/applications` | Logged in only |
+| `/saved-jobs` | Logged in only |
+| `/profile` | Logged in only |
+| `/post-job` | Logged in only |
 
 ## API Endpoints
 
-| Method | Endpoint | Auth |
-|--------|----------|------|
+| Method | Endpoint | Needs Auth |
+|--------|----------|------------|
 | POST | `/api/auth/register` | No |
 | POST | `/api/auth/login` | No |
 | POST | `/api/auth/reset-password-request` | No |
@@ -104,8 +91,8 @@ Runs on `http://localhost:5000`
 
 ## Team
 
-- Frontend — React SPA, routing, auth, UI
-- Backend — Flask REST API, JWT, database models
+- Frontend — React, routing, auth context, UI pages
+- Backend — Flask API, JWT auth, database models, migrations
 
 ## License
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import User
+from app.schemas import user_schema
 from flask_jwt_extended import create_access_token
 import secrets
 
@@ -34,7 +35,7 @@ def login():
         return jsonify({"message": "Invalid email or password"}), 401
 
     token = create_access_token(identity=str(user.id))
-    return jsonify({"token": token, "user": user.to_dict()}), 200
+    return jsonify({"token": token, "user": user_schema.dump(user)}), 200
 
 
 @auth_bp.route("/reset-password-request", methods=["POST"])
