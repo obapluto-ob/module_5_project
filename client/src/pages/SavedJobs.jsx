@@ -88,6 +88,7 @@ const styles = {
     alignItems: 'center',
     boxShadow: 'var(--shadow)',
     gap: '1rem',
+    flexWrap: 'wrap',
   },
   cardLeft: { display: 'flex', gap: '1rem', alignItems: 'center' },
   companyAvatar: {
