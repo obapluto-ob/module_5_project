@@ -57,7 +57,7 @@ export default function Profile() {
         <form onSubmit={handleUpdate} style={styles.form}>
           <h3 style={styles.sectionTitle}>Basic Info</h3>
 
-          <div style={styles.row}>
+          <div className="form-row" style={styles.row}>
             <div style={styles.field}>
               <label style={styles.label}>Full Name</label>
               <input style={styles.input} name="name" value={form.name} onChange={handleChange} required />
@@ -77,7 +77,7 @@ export default function Profile() {
           {isStudent && (
             <>
               <h3 style={{ ...styles.sectionTitle, marginTop: '0.5rem' }}>Student Details</h3>
-              <div style={styles.row}>
+              <div className="form-row" style={styles.row}>
                 <div style={styles.field}>
                   <label style={styles.label}>University / College</label>
                   <input style={styles.input} name="university" value={form.university}

@@ -51,7 +51,7 @@ export default function PostJob() {
           {error && <div style={styles.errorBox}>{error}</div>}
 
           <form onSubmit={handleSubmit} style={styles.form}>
-            <div style={styles.row}>
+            <div className="form-row" style={styles.row}>
               <div style={styles.field}>
                 <label style={styles.label}>Job Title</label>
                 <input style={styles.input} name="title" value={form.title}
@@ -64,7 +64,7 @@ export default function PostJob() {
               </div>
             </div>
 
-            <div style={styles.row}>
+            <div className="form-row" style={styles.row}>
               <div style={styles.field}>
                 <label style={styles.label}>Location</label>
                 <input style={styles.input} name="location" value={form.location}
