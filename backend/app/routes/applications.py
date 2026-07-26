@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import Application, Job
+from app.schemas import applications_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import select
 

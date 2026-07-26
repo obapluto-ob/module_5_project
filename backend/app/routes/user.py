@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import User
+from app.schemas import user_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import select
 
@@ -13,6 +14,8 @@ def get_profile():
     user_id = int(get_jwt_identity())
     user = db.get_or_404(User, user_id)
     return jsonify(user.to_dict()), 200
+    user = User.query.get_or_404(user_id)
+    return jsonify(user_schema.dump(user)), 200
 
 
 @user_bp.route("/profile", methods=["PUT"])
@@ -30,4 +33,4 @@ def update_profile():
         user.email = data["email"]
 
     db.session.commit()
-    return jsonify({"user": user.to_dict()}), 200
+    return jsonify({"user": user_schema.dump(user)}), 200

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import SavedJob, Job
+from app.schemas import saved_jobs_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import select
 
@@ -32,6 +33,8 @@ def get_saved_jobs():
     user_id = int(get_jwt_identity())
     saved = db.session.execute(select(SavedJob).filter_by(user_id=user_id)).scalars().all()
     return jsonify([s.to_dict() for s in saved]), 200
+    saved = SavedJob.query.filter_by(user_id=user_id).all()
+    return jsonify(saved_jobs_schema.dump(saved)), 200
 
 
 @saved_jobs_bp.route("/saved-jobs/<int:saved_id>", methods=["DELETE"])

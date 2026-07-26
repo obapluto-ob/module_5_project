@@ -2,6 +2,8 @@ from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import Job, Company
 from sqlalchemy import select
+from app.models.models import Job
+from app.schemas import job_schema, jobs_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 jobs_bp = Blueprint("jobs", __name__)
@@ -11,12 +13,16 @@ jobs_bp = Blueprint("jobs", __name__)
 def get_jobs():
     jobs = db.session.execute(select(Job)).scalars().all()
     return jsonify([j.to_dict() for j in jobs]), 200
+    jobs = Job.query.all()
+    return jsonify(jobs_schema.dump(jobs)), 200
 
 
 @jobs_bp.route("/jobs/<int:job_id>", methods=["GET"])
 def get_job(job_id):
     job = db.get_or_404(Job, job_id)
     return jsonify(job.to_dict()), 200
+    job = Job.query.get_or_404(job_id)
+    return jsonify(job_schema.dump(job)), 200
 
 
 @jobs_bp.route("/jobs", methods=["POST"])
@@ -49,7 +55,7 @@ def create_job():
     )
     db.session.add(job)
     db.session.commit()
-    return jsonify({"message": "Job created", "job": job.to_dict()}), 201
+    return jsonify({"message": "Job created", "job": job_schema.dump(job)}), 201
 
 
 @jobs_bp.route("/jobs/<int:job_id>", methods=["PUT"])
@@ -66,7 +72,7 @@ def update_job(job_id):
             setattr(job, field, data[field])
 
     db.session.commit()
-    return jsonify({"message": "Job updated", "job": job.to_dict()}), 200
+    return jsonify({"message": "Job updated", "job": job_schema.dump(job)}), 200
 
 
 @jobs_bp.route("/jobs/<int:job_id>", methods=["DELETE"])
