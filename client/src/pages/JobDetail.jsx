@@ -60,7 +60,7 @@ export default function JobDetail() {
           </div>
         </div>
 
-        <div style={styles.layout}>
+        <div className="job-detail-layout" style={styles.layout}>
           {/* Main content */}
           <div style={styles.main}>
             <div style={styles.section}>

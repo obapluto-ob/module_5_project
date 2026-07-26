@@ -8,11 +8,13 @@ with app.app_context():
     Job.query.delete()
     Company.query.delete()
     User.query.delete()
+    # saves the changes to the database
     db.session.commit()
 
     employer = User(name="Kamau Njoroge", email="employer@test.com", role="employer")
     employer.set_password("123456")
     db.session.add(employer)
+    # saves the changes to the database
     db.session.commit()
 
     companies = [
@@ -36,6 +38,10 @@ with app.app_context():
     db.session.add_all(jobs)
     db.session.commit()
 
+    print("Seed data added successfully!")
+    print("Employer login: employer@test.com / 123456")
+    print(f"Companies: {len(companies)}")
+    print(f"Jobs: {len(jobs)}")
     print("Data ya mbegu imeongezwa!")
     print(f"Ingia kama mwajiri: employer@test.com / 123456")
     print(f"Makampuni: {len(companies)}")

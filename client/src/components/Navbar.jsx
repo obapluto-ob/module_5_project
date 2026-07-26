@@ -22,7 +22,7 @@ export default function Navbar() {
           CareerHub
         </Link>
 
-        <div style={{ ...styles.links, ...(menuOpen ? styles.linksOpen : {}) }}>
+        <div className={`nav-links${menuOpen ? ' open' : ''}`}>
           <Link to="/jobs" style={{ ...styles.link, ...(isActive('/jobs') ? styles.activeLink : {}) }}>
             Browse Jobs
           </Link>
@@ -53,8 +53,8 @@ export default function Navbar() {
           )}
         </div>
 
-        <button style={styles.hamburger} onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
-          {menuOpen ? 'Close' : 'Menu'}
+        <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
+          {menuOpen ? '✕' : '☰'}
         </button>
       </div>
     </nav>
@@ -84,23 +84,7 @@ const styles = {
     color: '#fff',
     letterSpacing: '-0.5px',
   },
-  links: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.25rem',
-  },
-  linksOpen: {
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'absolute',
-    top: '64px',
-    left: 0,
-    right: 0,
-    background: '#0f172a',
-    padding: '1rem 1.5rem',
-    gap: '0.5rem',
-    borderBottom: '1px solid #1e293b',
-  },
+
   link: {
     color: '#94a3b8',
     padding: '0.4rem 0.75rem',
@@ -155,11 +139,5 @@ const styles = {
     fontWeight: '600',
     marginLeft: '0.25rem',
   },
-  hamburger: {
-    display: 'none',
-    background: 'transparent',
-    border: 'none',
-    color: '#fff',
-    fontSize: '1.4rem',
-  },
+
 }
