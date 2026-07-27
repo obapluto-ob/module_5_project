@@ -1,16 +1,53 @@
-# React + Vite
+# JOB BOARD Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This project is a job board application that allows users to post and search for job listings. It is built using modern web technologies and follows best practices for web development.
 
-Currently, two official plugins are available:
+# ## Features
+- User authentication and authorization
+- Job posting and management
+- Job search and filtering
+- Responsive design for mobile and desktop
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technologies Used
+- React.js for the frontend
+- Node.js and Express.js for the backend
+- MongoDB for the database
+- Tailwind CSS for styling
 
-## React Compiler
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone
+    ```
+2. Navigate to the project directory:
+   ```bash
+   cd job-board
+   ```
+3. Install dependencies for the backend:
+   ```bash
+   cd backend
+   npm install
+   ```
+4. Install dependencies for the frontend:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Usage
+1. Start the backend server:
+   ```bash
+   cd backend
+   npm start
+   ```
+2. Start the frontend development server:
+   ```bash
+   cd ../frontend
+   npm start
+   ```
+3. Open your web browser and navigate to `http://localhost:3000` to access the application.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Contributors - Frontend
+- [Joseph Musyoka](Main)
+- [Stacy Bynum](Main)
+- [Obed Lopeyok](Secondary)
