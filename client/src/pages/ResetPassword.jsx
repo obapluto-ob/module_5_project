@@ -12,6 +12,7 @@ export default function ResetPassword() {
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   async function handleRequestReset(e) {
     e.preventDefault()
@@ -110,8 +111,13 @@ export default function ResetPassword() {
             </div>
             <div style={styles.field}>
               <label style={styles.label}>New Password</label>
-              <input style={styles.input} type="password" placeholder="Enter your new password"
-                value={newPassword} onChange={e => setNewPassword(e.target.value)} required />
+              <div style={styles.inputWrap}>
+                <input style={styles.inputInner} type={showPassword ? 'text' : 'password'} placeholder="Enter your new password"
+                  value={newPassword} onChange={e => setNewPassword(e.target.value)} required />
+                <button type="button" style={styles.eyeBtn} onClick={() => setShowPassword(p => !p)}>
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
             </div>
             <button type="submit" style={styles.btn} disabled={loading}>
               {loading ? 'Updating...' : 'Update Password'}
@@ -192,6 +198,29 @@ const styles = {
     borderRadius: '8px',
     fontSize: '0.95rem',
     background: 'var(--bg)',
+  },
+  inputWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    background: 'var(--bg)',
+    overflow: 'hidden',
+  },
+  inputInner: {
+    flex: 1,
+    padding: '0.75rem 1rem',
+    border: 'none',
+    outline: 'none',
+    fontSize: '0.95rem',
+    background: 'transparent',
+  },
+  eyeBtn: {
+    background: 'none',
+    border: 'none',
+    padding: '0 0.75rem',
+    cursor: 'pointer',
+    fontSize: '1rem',
   },
   btn: {
     padding: '0.85rem',
