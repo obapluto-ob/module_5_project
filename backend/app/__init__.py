@@ -31,4 +31,7 @@ def create_app():
     app.register_blueprint(saved_jobs_bp, url_prefix="/api")
     app.register_blueprint(user_bp, url_prefix="/api/user")
 
+    with app.app_context():
+        db.create_all()
+
     return app
