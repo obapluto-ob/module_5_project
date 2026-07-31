@@ -17,7 +17,7 @@ def create_app():
     jwt.init_app(app)
     migrate.init_app(app, db)
     ma.init_app(app)
-    CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"], supports_credentials=True)
+    CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://module-5-project-five.vercel.app"], supports_credentials=True)
 
     from app.routes.auth import auth_bp
     from app.routes.jobs import jobs_bp
