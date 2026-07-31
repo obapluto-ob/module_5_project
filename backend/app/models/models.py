@@ -62,6 +62,7 @@ class Job(db.Model):
             "salary": self.salary,
             "location": self.location,
             "job_type": self.job_type,
+            "user_id": self.user_id,
             "company_name": self.company.name if self.company else None,
             "created_at": self.created_at.isoformat(),
         }

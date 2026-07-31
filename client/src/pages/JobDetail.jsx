@@ -13,10 +13,19 @@ export default function JobDetail() {
   const [saveMsg, setSaveMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const [applied, setApplied] = useState(false)
+  const [applicants, setApplicants] = useState([])
 
   useEffect(() => {
     axios.get(`/api/jobs/${id}`).then(res => setJob(res.data)).catch(() => {})
   }, [id])
+
+  useEffect(() => {
+    if (job && user && job.user_id === user.id) {
+      axios.get(`/api/jobs/${id}/applications`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(res => setApplicants(res.data))
+        .catch(() => {})
+    }
+  }, [job, user])
 
   async function handleApply(e) {
     e.preventDefault()
@@ -68,8 +77,20 @@ export default function JobDetail() {
               <p style={styles.description}>{job.description}</p>
             </div>
 
-            {/* Apply form */}
-            {token ? (
+            {/* Apply form or Employer view */}
+            {user && job.user_id === user.id ? (
+              <div style={styles.section}>
+                <h2 style={styles.sectionTitle}>Applicants ({applicants.length})</h2>
+                {applicants.length === 0 && <p style={{color:'var(--text-muted)'}}>No applications yet.</p>}
+                {applicants.map(a => (
+                  <div key={a.id} style={styles.applicantCard}>
+                    <p style={{fontWeight:'700'}}>{a.applicant_name} <span style={{fontWeight:'400',color:'var(--text-muted)'}}>— {a.applicant_email}</span></p>
+                    {a.cover_letter && <p style={{fontSize:'0.9rem',marginTop:'0.4rem'}}>{a.cover_letter}</p>}
+                    <p style={{fontSize:'0.8rem',color:'var(--text-muted)',marginTop:'0.3rem'}}>Applied {new Date(a.applied_at).toLocaleDateString()} · Status: <strong>{a.status}</strong></p>
+                  </div>
+                ))}
+              </div>
+            ) : token ? (
               applied ? (
                 <div style={styles.successBox}>
                   {applyMsg}
@@ -271,4 +292,11 @@ const styles = {
     fontSize: '0.95rem',
   },
   saveMsg: { fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' },
+  applicantCard: {
+    background: 'var(--bg)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    padding: '1rem',
+    marginBottom: '0.75rem',
+  },
 }
