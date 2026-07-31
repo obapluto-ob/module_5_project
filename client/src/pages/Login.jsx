@@ -7,6 +7,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const { login } = useAuth()
   const navigate = useNavigate()
 
@@ -51,8 +52,13 @@ export default function Login() {
               <label style={styles.label}>Password</label>
               <Link to="/reset-password" style={styles.forgotLink}>Forgot password?</Link>
             </div>
-            <input style={styles.input} placeholder="••••••••" type="password"
-              name="password" value={form.password} onChange={handleChange} required />
+            <div style={styles.inputWrap}>
+              <input style={styles.inputInner} placeholder="••••••••" type={showPassword ? 'text' : 'password'}
+                name="password" value={form.password} onChange={handleChange} required />
+              <button type="button" style={styles.eyeBtn} onClick={() => setShowPassword(p => !p)}>
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
           </div>
           <button type="submit" style={styles.btn} disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
@@ -109,6 +115,29 @@ const styles = {
     borderRadius: '8px',
     fontSize: '0.95rem',
     background: 'var(--bg)',
+  },
+  inputWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    background: 'var(--bg)',
+    overflow: 'hidden',
+  },
+  inputInner: {
+    flex: 1,
+    padding: '0.75rem 1rem',
+    border: 'none',
+    outline: 'none',
+    fontSize: '0.95rem',
+    background: 'transparent',
+  },
+  eyeBtn: {
+    background: 'none',
+    border: 'none',
+    padding: '0 0.75rem',
+    cursor: 'pointer',
+    fontSize: '1rem',
   },
   btn: {
     padding: '0.85rem',

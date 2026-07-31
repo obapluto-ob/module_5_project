@@ -1,0 +1,57 @@
+[33mba9190c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeat/frontend-ui-redesign-v2[m[33m, [m[1;31morigin/feat/frontend-ui-redesign-v2[m[33m)[m Update client README with project details and contributors
+[33mbeecfbf[m Merge branch 'main' into feat/frontend-ui-redesign-v2
+[33md0f25b5[m fix: add flex-wrap to SavedJobs card to prevent overflow on small screens
+[33m8937b15[m style: fix Applications page layout, use CSS variables and add max-width container
+[33m5f3d2cb[m fix: collapse two-column form rows to single column on mobile
+[33md23f445[m fix: collapse job detail sidebar to single column on mobile
+[33m79fdb2b[m fix: make navbar hamburger menu functional on mobile
+[33m8e091c3[m style: add responsive CSS classes for navbar, layout, and form rows
+[33m033c6b4[m remove react.svg from assets directory
+[33m32597bc[m remove vite.svg from assets directory
+[33med3f1b1[m remove hero.png from assets directory
+[33maa158a5[m Merge branch 'main' of github.com:obapluto-ob/module_5_project
+[33m0d0da28[m remove icons.svg file from public directory
+[33m37cf0c6[m remove favicon.svg file from public directory
+[33m3d61a39[m add vercel.json for deployment
+[33m7334b90[m updated readme to show the  actual project setup
+[33m7a69be3[m updated seed data companies and KES
+[33m858f584[m added marshmallow schemas for serialization
+[33m635341b[m switched from requirements.txt to pipenv, added flask-migrate
+[33mec2e9d2[m set up flask app with sqlalchemy models and blueprints
+[33m939cd54[m style: update App.css
+[33m9203d64[m fix: migrate user routes to SQLAlchemy 2.0 select API
+[33m41d2916[m fix: migrate saved_jobs routes to SQLAlchemy 2.0 select API
+[33m07211d9[m fix: migrate applications routes to SQLAlchemy 2.0 select API
+[33m238596a[m fix: migrate jobs routes to SQLAlchemy 2.0 select API
+[33m599ec0c[m fix: migrate auth routes to SQLAlchemy 2.0 select API
+[33m14b2b66[m fix: remove extraneous f-string prefix in seed.py
+[33mccfcfb3[m feat: install and configure Tailwind CSS
+[33m3e42213[m add package.json to define project dependencies
+[33mca6308e[m add package-lock.json to manage dependencies
+[33m2ca65a7[m Merge pull request #3 from obapluto-ob/main
+[33m1f2bbc8[m Merge pull request #2 from obapluto-ob/feat/frontend-ui-redesign-v2
+[33m9b27f99[m fixed proxy and cors to use localhost instead of hardcoded ip
+[33m58e0010[m Merge pull request #1 from obapluto-ob/feat/frontend-ui-redesign-v2
+[33me9e5579[m added step indicator to reset password flow
+[33m6c5a6fe[m cleaned up applications and saved jobs page design
+[33m3594f9f[m fixed post job form and connected it to the api
+[33m52517e7[m redesigned job detail page with sidebar and apply form
+[33m6469816[m added job type filter and improved job cards
+[33m17474ef[m added university graduation year and resume fields for students
+[33m079b368[m updated dashboard with role based cards for students
+[33m7191f30[m added student role option to registration form
+[33m17e86bf[m improved login page UI and added loading state
+[33mdb6786d[m redesigned home page with hero section and features
+[33mdf85197[m fixed navbar styling and added active link highlight
+[33m0c7b621[m updated global styles and added css variables
+[33mc4268c1[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m add project README with setup instructions and API docs
+[33mcfe62ad[m add assets and config files
+[33m091925a[m add applications, saved jobs and post job pages
+[33m80462d8[m add dashboard and profile pages
+[33m48209bb[m add jobs listing and job detail pages
+[33m4db9638[m add password reset flow
+[33m6163780[m add login and register pages
+[33mebe141e[m add navbar and app routing
+[33mc43d0c7[m add auth context and protected route
+[33m634dad7[m init react project with vite
+[33me5b33b1[m feat: complete Flask backend with JWT auth, all endpoints, models and seed data

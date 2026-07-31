@@ -12,6 +12,7 @@ export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'student' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
   function handleChange(e) {
@@ -58,8 +59,13 @@ export default function Register() {
 
           <div style={styles.field}>
             <label style={styles.label}>Password</label>
-            <input style={styles.input} placeholder="Min. 8 characters" type="password" name="password"
-              value={form.password} onChange={handleChange} required />
+            <div style={styles.inputWrap}>
+              <input style={styles.inputInner} placeholder="Min. 8 characters" type={showPassword ? 'text' : 'password'} name="password"
+                value={form.password} onChange={handleChange} required />
+              <button type="button" style={styles.eyeBtn} onClick={() => setShowPassword(p => !p)}>
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
           </div>
 
           <div style={styles.field}>
@@ -134,6 +140,29 @@ const styles = {
     fontSize: '0.95rem',
     outline: 'none',
     background: 'var(--bg)',
+  },
+  inputWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    background: 'var(--bg)',
+    overflow: 'hidden',
+  },
+  inputInner: {
+    flex: 1,
+    padding: '0.75rem 1rem',
+    border: 'none',
+    outline: 'none',
+    fontSize: '0.95rem',
+    background: 'transparent',
+  },
+  eyeBtn: {
+    background: 'none',
+    border: 'none',
+    padding: '0 0.75rem',
+    cursor: 'pointer',
+    fontSize: '1rem',
   },
   roleGrid: { display: 'flex', flexDirection: 'column', gap: '0.5rem' },
   roleCard: {
