@@ -11,8 +11,11 @@ applications_bp = Blueprint("applications", __name__)
 @applications_bp.route("/jobs/<int:job_id>/apply", methods=["POST"])
 @jwt_required()
 def apply(job_id):
-    db.get_or_404(Job, job_id)
+    job = db.get_or_404(Job, job_id)
     user_id = int(get_jwt_identity())
+
+    if job.user_id == user_id:
+        return jsonify({"message": "You cannot apply to your own job"}), 403
 
     if db.session.execute(select(Application).filter_by(user_id=user_id, job_id=job_id)).scalar_one_or_none():
         return jsonify({"message": "Already applied to this job"}), 409
@@ -35,6 +38,24 @@ def get_applications():
     user_id = int(get_jwt_identity())
     applications = db.session.execute(select(Application).filter_by(user_id=user_id)).scalars().all()
     return jsonify([a.to_dict() for a in applications]), 200
+
+
+@applications_bp.route("/jobs/<int:job_id>/applications", methods=["GET"])
+@jwt_required()
+def get_job_applications(job_id):
+    job = db.get_or_404(Job, job_id)
+    user_id = int(get_jwt_identity())
+    if job.user_id != user_id:
+        return jsonify({"message": "Unauthorized"}), 403
+    applications = db.session.execute(select(Application).filter_by(job_id=job_id)).scalars().all()
+    return jsonify([{
+        "id": a.id,
+        "applicant_name": a.applicant.name,
+        "applicant_email": a.applicant.email,
+        "cover_letter": a.cover_letter,
+        "status": a.status,
+        "applied_at": a.applied_at.isoformat()
+    } for a in applications]), 200
 
 
 @applications_bp.route("/applications/<int:app_id>", methods=["PUT"])
